@@ -1,0 +1,18 @@
+.btn {
+	display: inline-block;
+	margin: 0 0 1em;
+	padding: 1em 2em;
+	background-color:  $base-accent-color;
+	color: white;
+	border-radius: .2em;
+	transition: background-color .3s ease-in-out;
+	text-transform: uppercase;
+	font-size: .825em;
+	letter-spacing: .1em;
+}
+
+.btn:hover,
+.btn:focus {
+	color: white;
+	background-color: saturate($base-accent-color, 10%);
+}

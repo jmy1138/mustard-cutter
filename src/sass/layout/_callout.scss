@@ -1,0 +1,24 @@
+.callout {
+	padding: $base-spacing;
+	background-color: $base-accent-color;
+	color: white;
+	text-align: center;
+}
+
+.callout__title {
+	font-size: 1.2em;
+}
+
+.callout__list {
+	display: flex;
+	justify-content: center;
+}
+
+.callout__list li {
+	margin: 0 $base-spacing;
+}
+
+.callout__list li a {
+	display: block;
+	vertical-align: middle;
+}
