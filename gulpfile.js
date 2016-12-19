@@ -6,7 +6,6 @@
 var notify = require("gulp-notify");
 var browserSync = require('browser-sync').create();
 var del = require('del');
-var caniuse = require('caniuse-api');
 
 // Markup
 var htmlmin = require('gulp-htmlmin');
