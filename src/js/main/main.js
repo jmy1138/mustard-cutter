@@ -10,7 +10,11 @@
 	var selectedFeatures = [];
 	var testResult = document.getElementById('js-tests-result');
 	var clipboardButton = document.getElementById('js-clipboard-btn');
-
+var browsers = [
+	'chrome',
+	'edge',
+	''
+];
 
 	/**
 	 * Feature Object
@@ -85,6 +89,7 @@
 		var featureItem = featureList[featureName];
 		toggleArrayItem( selectedFeatures, featureItem);
 		createFeatureTest();
+		createFeatureSupport();
 	};
 
 
@@ -99,6 +104,29 @@
 		} else {
 			testResult.innerHTML = '';
 		}
+	};
+
+
+	var createFeatureSupport = function() {
+		var supportArray = [];
+		for (var key in selectedFeatures) {
+			supportArray.push( selectedFeatures[key].support );
+			console.log( selectedFeatures[key].support );
+		}
+
+		var maxBrowserSupport = {};
+		for(var browser in browsers){
+			maxBrowserSupport[browser] = _.max(_.map(_.map(supportArray,browser));
+		}
+		return maxBrowserSupport;
+		//var firefox = _.max(_.map(_.map(supportArray,'firefox')));
+		//var internetexplorer = _.max(_.map(_.map(supportArray,'internetexplorer')));
+
+		//console.log( _.max(_.map(_.map(supportArray,'firefox'))) );
+
+		//console.log( firefox );
+		//console.log( internetexplorer );
+
 	};
 
 
