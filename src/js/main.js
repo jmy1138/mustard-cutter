@@ -4614,13 +4614,13 @@ module.exports = E;
 			test: '\'querySelector\' in document',
 			support: {
 				chrome: 1,
-				edge: 'Yes',
+				edge: 13,
 				firefox: 3.5,
 				internetexplorer: 8,
 				opera: 10,
 				safari: 3.2,
 				android: 2.1,
-				firefoxmobile: 'Yes',
+				firefoxmobile: 1.0,
 				iemobile: 9,
 				operamobile: 10,
 				safarimobile: 3.2
@@ -4630,7 +4630,7 @@ module.exports = E;
 			test: '\'addEventListener\' in window',
 			support: {
 				chrome: 1,
-				edge: 'Yes',
+				edge: 13,
 				firefox: 1,
 				internetexplorer: 9,
 				opera: 7,
@@ -4646,7 +4646,7 @@ module.exports = E;
 			test: '\'classList\' in document.documentElement',
 			support: {
 				chrome: 8,
-				edge: 'Yes',
+				edge: 13,
 				firefox: 3.6,
 				internetexplorer: 10,
 				opera: 11.5,
@@ -4679,20 +4679,39 @@ module.exports = E;
 		var featureItem = featureList[featureName];
 		toggleArrayItem( selectedFeatures, featureItem);
 		createFeatureTest();
+		createFeatureSupport();
 	};
 
 
 	var createFeatureTest = function() {
-		var testArrary = [];
+		var testArray = [];
 		for (var key in selectedFeatures) {
-			testArrary.push( selectedFeatures[key].test );
+			testArray.push( selectedFeatures[key].test );
 		}
-		var tests = testArrary.join(" && ");
+		var tests = testArray.join(" && ");
 		if (tests.length > 0) {
 			testResult.innerHTML =  'if(' + tests + ') {' + '\n' + '\t' + '// bootstrap the javascript application' + '\n' + '}';
 		} else {
 			testResult.innerHTML = '';
 		}
+	};
+
+
+	var createFeatureSupport = function() {
+		var supportArray = [];
+		for (var key in selectedFeatures) {
+			supportArray.push( selectedFeatures[key].support );
+			console.log( selectedFeatures[key].support );
+		}
+
+		var firefox = _.max(_.map(_.map(supportArray,'firefox')));
+		var internetexplorer = _.max(_.map(_.map(supportArray,'internetexplorer')));
+
+		//console.log( _.max(_.map(_.map(supportArray,'firefox'))) );
+
+		//console.log( firefox );
+		//console.log( internetexplorer );
+
 	};
 
 
