@@ -10,23 +10,7 @@
 	var selectedFeatures = [];
 	var testResult = document.getElementById('js-tests-result');
 	var clipboardButton = document.getElementById('js-clipboard-btn');
-
-	/**
-	 * Arrays
-	 */
-	var browsers = [
-		'chrome',
-		'edge',
-		'firefox',
-		'internetexplorer',
-		'opera',
-		'safari',
-		'android',
-		'firefoxmobile',
-		'iemobile',
-		'operamobile',
-		'safarimobile'
-	];
+	var supportTable = document.getElementById('js-browser-support');
 
 
 	/**
@@ -39,7 +23,7 @@
 				chrome: 1,
 				edge: 13,
 				firefox: 3.5,
-				internetexplorer: 8,
+				ie: 8,
 				opera: 10,
 				safari: 3.2,
 				android: 2.1,
@@ -55,7 +39,7 @@
 				chrome: 1,
 				edge: 13,
 				firefox: 1,
-				internetexplorer: 9,
+				ie: 9,
 				opera: 7,
 				safari: 1.0,
 				android: 1.0,
@@ -71,7 +55,7 @@
 				chrome: 8,
 				edge: 13,
 				firefox: 3.6,
-				internetexplorer: 10,
+				ie: 10,
 				opera: 11.5,
 				safari: 5.1,
 				android: 3.0,
@@ -94,6 +78,20 @@
 		} else {
 			collection.push(item);
 		}
+	};
+
+	var forEach = function (collection, callback, scope) {
+	  if (Object.prototype.toString.call(collection) === '[object Object]') {
+	    for (var prop in collection) {
+	      if (Object.prototype.hasOwnProperty.call(collection, prop)) {
+	        callback.call(scope, collection[prop], prop, collection);
+	      }
+	    }
+	  } else {
+	    for (var i = 0, len = collection.length; i < len; i++) {
+	      callback.call(scope, collection[i], i, collection);
+	    }
+	  }
 	};
 
 
@@ -127,16 +125,24 @@
 			supportArray.push( selectedFeatures[key].support );
 		}
 
-		var maxBrowserSupport = {};
+		var maxBrowserSupport = {
+			chrome: _.max(_.map(_.map(supportArray, 'chrome'))),
+			edge: _.max(_.map(_.map(supportArray, 'edge'))),
+			firefox: _.max(_.map(_.map(supportArray, 'firefox'))),
+			ie: _.max(_.map(_.map(supportArray, 'ie'))),
+			opera: _.max(_.map(_.map(supportArray, 'opera'))),
+			safari: _.max(_.map(_.map(supportArray, 'safari'))),
+			android: _.max(_.map(_.map(supportArray, 'android'))),
+			firefoxmobile: _.max(_.map(_.map(supportArray, 'firefoxmobile'))),
+			iemobile: _.max(_.map(_.map(supportArray, 'iemobile'))),
+			operamobile: _.max(_.map(_.map(supportArray, 'operamobile'))),
+			safarimobile: _.max(_.map(_.map(supportArray, 'safarimobile')))
+		};
 
-		for(var browser in browsers) {
-			maxBrowserSupport[browser] = _.max(_.map(_.map(supportArray,browser)));
-		}
+		forEach( maxBrowserSupport, function (value) {
 
-		return maxBrowserSupport;
+		});
 	};
-
-	console.log( createFeatureSupport() );
 
 
 	/**
