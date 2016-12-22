@@ -10,11 +10,16 @@
 	var selectedFeatures = [];
 	var testResult = document.getElementById('js-tests-result');
 	var clipboardButton = document.getElementById('js-clipboard-btn');
+<<<<<<< HEAD
 var browsers = [
 	'chrome',
 	'edge',
 	''
 ];
+=======
+	var supportTable = document.getElementById('js-browser-support');
+
+>>>>>>> origin/master
 
 	/**
 	 * Feature Object
@@ -24,13 +29,13 @@ var browsers = [
 			test: '\'querySelector\' in document',
 			support: {
 				chrome: 1,
-				edge: 'Yes',
+				edge: 13,
 				firefox: 3.5,
-				internetexplorer: 8,
+				ie: 8,
 				opera: 10,
 				safari: 3.2,
 				android: 2.1,
-				firefoxmobile: 'Yes',
+				firefoxmobile: 1.0,
 				iemobile: 9,
 				operamobile: 10,
 				safarimobile: 3.2
@@ -40,9 +45,9 @@ var browsers = [
 			test: '\'addEventListener\' in window',
 			support: {
 				chrome: 1,
-				edge: 'Yes',
+				edge: 13,
 				firefox: 1,
-				internetexplorer: 9,
+				ie: 9,
 				opera: 7,
 				safari: 1.0,
 				android: 1.0,
@@ -56,9 +61,9 @@ var browsers = [
 			test: '\'classList\' in document.documentElement',
 			support: {
 				chrome: 8,
-				edge: 'Yes',
+				edge: 13,
 				firefox: 3.6,
-				internetexplorer: 10,
+				ie: 10,
 				opera: 11.5,
 				safari: 5.1,
 				android: 3.0,
@@ -83,6 +88,20 @@ var browsers = [
 		}
 	};
 
+	var forEach = function (collection, callback, scope) {
+	  if (Object.prototype.toString.call(collection) === '[object Object]') {
+	    for (var prop in collection) {
+	      if (Object.prototype.hasOwnProperty.call(collection, prop)) {
+	        callback.call(scope, collection[prop], prop, collection);
+	      }
+	    }
+	  } else {
+	    for (var i = 0, len = collection.length; i < len; i++) {
+	      callback.call(scope, collection[i], i, collection);
+	    }
+	  }
+	};
+
 
 	var addFeature = function( elem ) {
 		var featureName = elem.getAttribute('data-feature');
@@ -94,11 +113,11 @@ var browsers = [
 
 
 	var createFeatureTest = function() {
-		var testArrary = [];
+		var testArray = [];
 		for (var key in selectedFeatures) {
-			testArrary.push( selectedFeatures[key].test );
+			testArray.push( selectedFeatures[key].test );
 		}
-		var tests = testArrary.join(" && ");
+		var tests = testArray.join(" && ");
 		if (tests.length > 0) {
 			testResult.innerHTML =  'if(' + tests + ') {' + '\n' + '\t' + '// bootstrap the javascript application' + '\n' + '}';
 		} else {
@@ -109,6 +128,7 @@ var browsers = [
 
 	var createFeatureSupport = function() {
 		var supportArray = [];
+<<<<<<< HEAD
 		for (var key in selectedFeatures) {
 			supportArray.push( selectedFeatures[key].support );
 			console.log( selectedFeatures[key].support );
@@ -127,6 +147,30 @@ var browsers = [
 		//console.log( firefox );
 		//console.log( internetexplorer );
 
+=======
+
+		for (var key in selectedFeatures) {
+			supportArray.push( selectedFeatures[key].support );
+		}
+
+		var maxBrowserSupport = {
+			chrome: _.max(_.map(_.map(supportArray, 'chrome'))),
+			edge: _.max(_.map(_.map(supportArray, 'edge'))),
+			firefox: _.max(_.map(_.map(supportArray, 'firefox'))),
+			ie: _.max(_.map(_.map(supportArray, 'ie'))),
+			opera: _.max(_.map(_.map(supportArray, 'opera'))),
+			safari: _.max(_.map(_.map(supportArray, 'safari'))),
+			android: _.max(_.map(_.map(supportArray, 'android'))),
+			firefoxmobile: _.max(_.map(_.map(supportArray, 'firefoxmobile'))),
+			iemobile: _.max(_.map(_.map(supportArray, 'iemobile'))),
+			operamobile: _.max(_.map(_.map(supportArray, 'operamobile'))),
+			safarimobile: _.max(_.map(_.map(supportArray, 'safarimobile')))
+		};
+
+		forEach( maxBrowserSupport, function (value) {
+
+		});
+>>>>>>> origin/master
 	};
 
 
