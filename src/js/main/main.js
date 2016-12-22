@@ -11,6 +11,23 @@
 	var testResult = document.getElementById('js-tests-result');
 	var clipboardButton = document.getElementById('js-clipboard-btn');
 
+	/**
+	 * Arrays
+	 */
+	var browsers = [
+		'chrome',
+		'edge',
+		'firefox',
+		'internetexplorer',
+		'opera',
+		'safari',
+		'android',
+		'firefoxmobile',
+		'iemobile',
+		'operamobile',
+		'safarimobile'
+	];
+
 
 	/**
 	 * Feature Object
@@ -105,20 +122,21 @@
 
 	var createFeatureSupport = function() {
 		var supportArray = [];
+
 		for (var key in selectedFeatures) {
 			supportArray.push( selectedFeatures[key].support );
-			console.log( selectedFeatures[key].support );
 		}
 
-		var firefox = _.max(_.map(_.map(supportArray,'firefox')));
-		var internetexplorer = _.max(_.map(_.map(supportArray,'internetexplorer')));
+		var maxBrowserSupport = {};
 
-		//console.log( _.max(_.map(_.map(supportArray,'firefox'))) );
+		for(var browser in browsers) {
+			maxBrowserSupport[browser] = _.max(_.map(_.map(supportArray,browser)));
+		}
 
-		//console.log( firefox );
-		//console.log( internetexplorer );
-
+		return maxBrowserSupport;
 	};
+
+	console.log( createFeatureSupport() );
 
 
 	/**
