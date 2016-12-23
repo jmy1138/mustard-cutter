@@ -4674,6 +4674,7 @@ module.exports = E;
 		}
 	};
 
+
 	var forEach = function (collection, callback, scope) {
 	  if (Object.prototype.toString.call(collection) === '[object Object]') {
 	    for (var prop in collection) {
@@ -4733,9 +4734,16 @@ module.exports = E;
 			safarimobile: _.max(_.map(_.map(supportArray, 'safarimobile')))
 		};
 
-		forEach( maxBrowserSupport, function (value) {
+		var supportList = [];
 
+		Object.keys(maxBrowserSupport).forEach(function(key) {
+		    supportList.push('<td>' + maxBrowserSupport[key] + '</td>' );
 		});
+
+		supportList.join("%");
+
+		supportTable.innerHTML = supportList;
+
 	};
 
 

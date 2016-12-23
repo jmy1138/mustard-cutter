@@ -10,16 +10,8 @@
 	var selectedFeatures = [];
 	var testResult = document.getElementById('js-tests-result');
 	var clipboardButton = document.getElementById('js-clipboard-btn');
-<<<<<<< HEAD
-var browsers = [
-	'chrome',
-	'edge',
-	''
-];
-=======
 	var supportTable = document.getElementById('js-browser-support');
 
->>>>>>> origin/master
 
 	/**
 	 * Feature Object
@@ -88,6 +80,7 @@ var browsers = [
 		}
 	};
 
+
 	var forEach = function (collection, callback, scope) {
 	  if (Object.prototype.toString.call(collection) === '[object Object]') {
 	    for (var prop in collection) {
@@ -128,26 +121,6 @@ var browsers = [
 
 	var createFeatureSupport = function() {
 		var supportArray = [];
-<<<<<<< HEAD
-		for (var key in selectedFeatures) {
-			supportArray.push( selectedFeatures[key].support );
-			console.log( selectedFeatures[key].support );
-		}
-
-		var maxBrowserSupport = {};
-		for(var browser in browsers){
-			maxBrowserSupport[browser] = _.max(_.map(_.map(supportArray,browser));
-		}
-		return maxBrowserSupport;
-		//var firefox = _.max(_.map(_.map(supportArray,'firefox')));
-		//var internetexplorer = _.max(_.map(_.map(supportArray,'internetexplorer')));
-
-		//console.log( _.max(_.map(_.map(supportArray,'firefox'))) );
-
-		//console.log( firefox );
-		//console.log( internetexplorer );
-
-=======
 
 		for (var key in selectedFeatures) {
 			supportArray.push( selectedFeatures[key].support );
@@ -167,10 +140,16 @@ var browsers = [
 			safarimobile: _.max(_.map(_.map(supportArray, 'safarimobile')))
 		};
 
-		forEach( maxBrowserSupport, function (value) {
+		var supportList = [];
 
+		Object.keys(maxBrowserSupport).forEach(function(key) {
+		    supportList.push('<td>' + maxBrowserSupport[key] + '</td>' );
 		});
->>>>>>> origin/master
+
+		supportList.join("%");
+
+		supportTable.innerHTML = supportList;
+
 	};
 
 
