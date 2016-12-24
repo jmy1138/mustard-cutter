@@ -81,21 +81,6 @@
 	};
 
 
-	var forEach = function (collection, callback, scope) {
-	  if (Object.prototype.toString.call(collection) === '[object Object]') {
-	    for (var prop in collection) {
-	      if (Object.prototype.hasOwnProperty.call(collection, prop)) {
-	        callback.call(scope, collection[prop], prop, collection);
-	      }
-	    }
-	  } else {
-	    for (var i = 0, len = collection.length; i < len; i++) {
-	      callback.call(scope, collection[i], i, collection);
-	    }
-	  }
-	};
-
-
 	var addFeature = function( elem ) {
 		var featureName = elem.getAttribute('data-feature');
 		var featureItem = featureList[featureName];
@@ -111,7 +96,7 @@
 			testArray.push( selectedFeatures[key].test );
 		}
 		var tests = testArray.join(" && ");
-		if (tests.length > 0) {
+		if ( selectedFeatures.length > 0 ) {
 			testResult.innerHTML =  'if(' + tests + ') {' + '\n' + '\t' + '// bootstrap the javascript application' + '\n' + '}';
 		} else {
 			testResult.innerHTML = '';
@@ -121,11 +106,9 @@
 
 	var createFeatureSupport = function() {
 		var supportArray = [];
-
 		for (var key in selectedFeatures) {
 			supportArray.push( selectedFeatures[key].support );
 		}
-
 		var maxBrowserSupport = {
 			chrome: _.max(_.map(_.map(supportArray, 'chrome'))),
 			edge: _.max(_.map(_.map(supportArray, 'edge'))),
@@ -139,17 +122,15 @@
 			operamobile: _.max(_.map(_.map(supportArray, 'operamobile'))),
 			safarimobile: _.max(_.map(_.map(supportArray, 'safarimobile')))
 		};
-
 		var supportList = [];
-
 		Object.keys(maxBrowserSupport).forEach(function(key) {
 		    supportList.push('<td>' + maxBrowserSupport[key] + '</td>' );
 		});
-
-		supportList.join("%");
-
-		supportTable.innerHTML = supportList;
-
+		if ( selectedFeatures.length > 0 ) {
+			supportTable.innerHTML = supportList.join('').toString();
+		} else {
+			supportTable.innerHTML = '';
+		}
 	};
 
 
